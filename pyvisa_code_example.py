@@ -1,10 +1,13 @@
 # https://edadocs.software.keysight.com/kkbopen/use-a-python-program-to-output-several-voltage-levels-from-the-e36xxa-series-of-dc-power-supplies-620693041.html
-import visa
+import pyvisa
+import pymeasure
+print(pymeasure.__file__)
 
 #user define list voltage output
 voltages = [0.1,0,0.1,0,0.1,0,0.1,0,0.1,0,0.1,0]
 #Open Connection Keysight Visa 
-rm = visa.ResourceManager()
+rm = pyvisa.ResourceManager()
+rm.list_resources()
 #Connect to VISA Address
 #GPIB Connection: 'GPIP0::xx::INSTR'
 myinst = rm.open_resource("GPIB0::13::INSTR")
@@ -18,7 +21,7 @@ myinst.write(':INSTrument:NSELect 1')
 myinst.write(':OUTPut:STATe 1')
 #generate voltage level output in sequence
 for i in range(len(voltages)):
-    myinst.write(':SOURce:VOLTage:LEVel:IMMediate:AMPLitude %G' % )
+    myinst.write(f':SOURce:VOLTage:LEVel:IMMediate:AMPLitude {voltages[i]}')
     #change this delay to increase or decrease output intervals        
     myinst.timeout = 1000
     
