@@ -42,12 +42,14 @@ void loop()  {
     if (data == 112) { // p (lowercase)
         digitalWrite(relay1, HIGH);
         digitalWrite(relay2, HIGH);
-        Serial.write("polarity set to positive");
+        delay(100);
+        Serial.println("polarity set to positive");
     } else if (data == 110) { // n (lowercase)
         digitalWrite(relay1, LOW);
         digitalWrite(relay2, LOW);
-        Serial.write("polarity set to negative");
+        delay(100);
+        Serial.println("polarity set to negative");
     } else {
-        Serial.write("please provide p or n for changing polarity");
+        //Serial.write("please provide p or n for changing polarity");
     }
 }

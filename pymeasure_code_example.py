@@ -4,7 +4,7 @@ import visa
     
 def setup():
     global relay_ser, DC
-    relay_ser = serial.Serial('COM3', 9600, timeout=0):
+    relay_ser = serial.Serial('COM3', 9600, timeout=0)
 
     rm = visa.ResourceManager()
     res = rm.list_resources()
