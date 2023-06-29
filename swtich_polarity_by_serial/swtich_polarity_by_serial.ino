@@ -33,7 +33,7 @@ void setup()  {
     // declare relay1, relay2 to be an output:
     pinMode(relay1, OUTPUT);
     pinMode(relay2, OUTPUT);
-    Serial.begin(9600);
+    Serial.begin(115200);
 }
 
 // the loop routine runs over and over again forever:
@@ -42,13 +42,11 @@ void loop()  {
     if (data == 112) { // p (lowercase)
         digitalWrite(relay1, HIGH);
         digitalWrite(relay2, HIGH);
-        delay(100);
-        Serial.println("polarity set to positive");
+        //Serial.println("polarity set to positive");
     } else if (data == 110) { // n (lowercase)
         digitalWrite(relay1, LOW);
         digitalWrite(relay2, LOW);
-        delay(100);
-        Serial.println("polarity set to negative");
+        //Serial.println("polarity set to negative");
     } else {
         //Serial.write("please provide p or n for changing polarity");
     }
