@@ -38,16 +38,29 @@ void setup()  {
 
 // the loop routine runs over and over again forever:
 void loop()  {
-    char data = Serial.read();
-    if (data == 112) { // p (lowercase)
-        digitalWrite(relay1, HIGH);
-        digitalWrite(relay2, HIGH);
-        //Serial.println("polarity set to positive");
-    } else if (data == 110) { // n (lowercase)
-        digitalWrite(relay1, LOW);
-        digitalWrite(relay2, LOW);
-        //Serial.println("polarity set to negative");
+  int prevRelayHL = 0;
+  int relayHL = 0;
+  while (true) {
+    int readValue = analogRead(A4);
+
+    prevRelayHL = relayHL;
+    if (readValue > 500) {
+      relayHL = 1;
     } else {
-        //Serial.write("please provide p or n for changing polarity");
+      relayHL = 0;
     }
+    //Serial.println(readValue);
+    //Serial.println(relayHL);
+    if (prevRelayHL != relayHL) {
+      if (relayHL > 0) { // p (lowercase)
+          digitalWrite(relay1, HIGH);
+          digitalWrite(relay2, HIGH);
+          //Serial.println("polarity set to positive");
+      } else { // n (lowercase)
+          digitalWrite(relay1, LOW);
+          digitalWrite(relay2, LOW);
+      }
+    }
+  }
+  
 }
